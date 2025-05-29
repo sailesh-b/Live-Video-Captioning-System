@@ -11,11 +11,8 @@ This project implements a **Live Video Captioning System** designed to assist vi
 - [System Architecture](#system-architecture)  
 - [Installation](#installation)  
 - [Usage](#usage)  
-- [Dataset Preparation](#dataset-preparation)  
 - [Training](#training)  
 - [Evaluation](#evaluation)  
-- [Assistive Technology Integration](#assistive-technology-integration)  
-- [Performance and Latency](#performance-and-latency)  
 - [Contributing](#contributing)  
 - [License](#license)  
 - [References](#references)  
@@ -102,7 +99,6 @@ Before running or training the system, you need to download the pretrained model
   - ResNet-50 (for visual feature extraction)  
   - VGGish (for audio feature extraction)  
   
-  These weights can be obtained from the official model repositories or included links in the `docs/DATASETS.md` file. Place the downloaded weights in the appropriate `models/` directory as specified by the configuration.
 
 - **Datasets**  
   The system was trained and tested using the following datasets:  
@@ -113,3 +109,56 @@ Before running or training the system, you need to download the pretrained model
 
 *Note:* Dataset download links are large and may require registration or acceptance of terms. Ensure you have sufficient storage space and bandwidth.
 
+
+---
+
+## Usage
+
+### Running Live Captioning on a Video File
+
+```bash
+python lvcs.py 
+```
+
+### For full CLI options, run:
+
+```bash
+python lvcs.py --help
+```
+
+## Training
+
+To train the full model:
+
+```bash
+python main.py --train
+```
+
+Training configuration includes hyperparameters like learning rate, batch size, number of transformer layers, etc.
+
+Checkpoint and logs will be saved to the checkpoints/ directory.
+
+## Evaluation
+
+Evaluate the model with:
+
+```bash
+python main.py --validate --model_path checkpoints/best_model.pth --dataset msrvtt_val
+```
+- Metrics include BLEU, METEOR, ROUGE, and CIDEr scores, along with latency benchmarks.
+
+## Contributing
+Contributions are welcome! Please open issues or pull requests for bugs, features, or improvements.
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## References
+
+SwinBERT: End-to-End Transformers with Sparse Attention for Video Captioning
+
+Video Captioning: A Survey
+
+Vaswani et al., "Attention is All You Need", NeurIPS 2017.
+
+Bertasius et al., "Is Space-Time Attention All You Need for Video Understanding?", ICML 2021.
